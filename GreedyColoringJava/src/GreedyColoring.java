@@ -56,6 +56,23 @@ public class GreedyColoring {
         return colored;
     }
 
+    public void printGraph() {
+        System.out.println("--------- Printing the graph ----------------");
+        for(int vertex : this.vertices) {
+            List<Integer> edges = this.graph.get(vertex);
+            System.out.println(vertex + " has connection with " + Arrays.toString(edges.toArray()));
+        }
+    }
+
+    public void printColors(HashMap<Integer, Integer> colored) {
+        System.out.println("--------- Printing the colors of the graph ----------------");
+        Set<Map.Entry<Integer, Integer>> entries = colored.entrySet();
+
+        for (Map.Entry<Integer, Integer> entry : entries) {
+            System.out.println("vertex: " + entry.getKey() + " has color: "+ entry.getValue());
+        }
+    }
+
     public static void main(String args[]) {
         FileInputStream instream = null;
 
@@ -68,6 +85,21 @@ public class GreedyColoring {
         }
 
         Scanner in = new Scanner(System.in);
+
+        int[] vs = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+        Integer[] Vs = Arrays.stream(vs).boxed().toArray(Integer[]::new);
+
+        GreedyColoring graph = new GreedyColoring(Vs);
+
+        while(in.hasNext()) {
+            int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            graph.addConnection(eg[0], eg[1]);
+            graph.addConnection(eg[1], eg[0]);
+        }
+
+        graph.printGraph();
+
+        graph.printColors(graph.applyColors());
 
     }
 }
