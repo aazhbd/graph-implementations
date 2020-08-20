@@ -59,5 +59,15 @@ public class GreedyColoring {
     public static void main(String args[]) {
         FileInputStream instream = null;
 
+        try {
+            instream = new FileInputStream(input);
+            System.setIn(instream);
+        }
+        catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        Scanner in = new Scanner(System.in);
+
     }
 }
