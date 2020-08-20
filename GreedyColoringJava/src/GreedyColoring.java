@@ -11,17 +11,16 @@ public class GreedyColoring {
 
         this.graph = new HashMap<Integer, List<Integer>>();
 
-        for(int vertex : this.vertices) {
+        for (int vertex : this.vertices) {
             this.graph.put(vertex, new ArrayList<Integer>());
         }
     }
 
     public void addConnection(Integer f, Integer t) {
-        if(this.vertices.contains(f) && this.vertices.contains(t))
-        {
+        if (this.vertices.contains(f) && this.vertices.contains(t)) {
             List<Integer> edges = this.graph.get(f);
 
-            if(!edges.contains(t)) {
+            if (!edges.contains(t)) {
                 edges.add(t);
             }
 
@@ -30,8 +29,8 @@ public class GreedyColoring {
     }
 
     public int pickColor(List<Integer> colors) {
-        for(int c = 0; ; c++) {
-            if(!colors.contains(c)) {
+        for (int c = 0; ; c++) {
+            if (!colors.contains(c)) {
                 return c;
             }
         }
@@ -41,11 +40,11 @@ public class GreedyColoring {
         HashMap<Integer, Integer> colored = new HashMap<Integer, Integer>();
         List<Integer> used_colors = new ArrayList<Integer>();
 
-        for(int vertex : this.vertices) {
+        for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
 
-            for(int e : edges) {
-                if(colored.containsKey(e)) {
+            for (int e : edges) {
+                if (colored.containsKey(e)) {
                     used_colors.add(colored.get(e));
                 }
             }
@@ -58,7 +57,7 @@ public class GreedyColoring {
 
     public void printGraph() {
         System.out.println("--------- Printing the graph ----------------");
-        for(int vertex : this.vertices) {
+        for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
             System.out.println(vertex + " has connection with " + Arrays.toString(edges.toArray()));
         }
@@ -69,18 +68,17 @@ public class GreedyColoring {
         Set<Map.Entry<Integer, Integer>> entries = colored.entrySet();
 
         for (Map.Entry<Integer, Integer> entry : entries) {
-            System.out.println("vertex: " + entry.getKey() + " has color: "+ entry.getValue());
+            System.out.println("vertex: " + entry.getKey() + " has color: " + entry.getValue());
         }
     }
 
-    public static void main(String args[]) {
-        FileInputStream instream = null;
+    public static void main(String[] args) {
+        FileInputStream instr = null;
 
         try {
-            instream = new FileInputStream(input);
-            System.setIn(instream);
-        }
-        catch (Exception e) {
+            instr = new FileInputStream(input);
+            System.setIn(instr);
+        } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
 
@@ -91,7 +89,7 @@ public class GreedyColoring {
 
         GreedyColoring graph = new GreedyColoring(Vs);
 
-        while(in.hasNext()) {
+        while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
             graph.addConnection(eg[0], eg[1]);
             graph.addConnection(eg[1], eg[0]);
