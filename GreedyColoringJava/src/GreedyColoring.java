@@ -101,5 +101,22 @@ public class GreedyColoring {
 
         graph.printColors(graph.applyColors());
 
+        GreedyColoring gc = new GreedyColoring(new Integer[]{1, 2, 3, 4, 5, 6});
+
+        gc.addConnection(1, 2);
+        gc.addConnection(1, 3);
+        gc.addConnection(2, 4);
+        gc.addConnection(2, 5);
+        gc.addConnection(3, 5);
+        gc.addConnection(4, 1);
+        gc.addConnection(5, 2);
+        gc.addConnection(5, 4);
+        gc.addConnection(6, 3);
+        gc.addConnection(6, 4);
+
+        gc.printGraph();
+
+        gc.printColors(gc.applyColors());
     }
 }
+
