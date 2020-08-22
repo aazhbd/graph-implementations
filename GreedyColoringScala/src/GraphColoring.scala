@@ -43,7 +43,7 @@ object GraphColoring {
 
         def colorPicker(n: Int, used:List[Int]): Int = {
             if(used.contains(n)) colorPicker(n + 1, used)
-            else return n
+            else n
         }
 
         def applyColors(): Unit = {
