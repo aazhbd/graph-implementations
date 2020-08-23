@@ -16,9 +16,9 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        println(gc.colorPicker(0, List(1, 2, 3, 4)))
+        //println(gc.colorPicker(0, List(0, 1, 2, 3, 4)))
 
-        println(gc.graph())
+        println(gc.applyColors())
     }
 
     class Graph(val vertices: List[Int]) {
@@ -46,8 +46,40 @@ object GraphColoring {
             else n
         }
 
-        def applyColors(): Unit = {
-            println(this.graph())
+        def applyColorsImper(): Map[Int, Int] = {
+            var colored = Map[Int, Int]()
+            var used_colors = List(-1)
+
+            for (vertex <- this.vertices) {
+                var edges = this.graph()(vertex);
+
+                for (e <- edges) {
+                    if (colored.contains(e)) {
+                        used_colors = used_colors :+ colored(e)
+                    }
+                }
+
+                var color = (colorPicker(-1, used_colors))
+                colored.put(vertex, color)
+            }
+            colored
+        }
+
+        def applyColors(): Map[Int, Int] = {
+            var colored = Map[Int, Int]()
+            var used_colors = List(-1)
+
+            def getColor(vertex: Int): Int = {
+                this.graph()(vertex).foreach(e => {
+                    if(colored.contains(e)) {
+                        used_colors = used_colors :+ colored(e)
+                    }
+                })
+                (colorPicker(-1, used_colors))
+            }
+
+            this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
+            colored
         }
     }
 
