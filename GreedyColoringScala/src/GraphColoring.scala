@@ -70,7 +70,7 @@ object GraphColoring {
         }
 
         def applyColors(): Map[Int, Int] = {
-            var colored = Map[Int, Int]()
+            val colored = Map[Int, Int]()
             var used_colors = List(-1)
 
             def getColor(vertex: Int): Int = {
