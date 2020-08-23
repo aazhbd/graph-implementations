@@ -2,7 +2,7 @@ import scala.collection.mutable.Map
 
 object GraphColoring {
 
-    def main(args : Array[String]) {
+    def main(args: Array[String]) {
         var gc = new Graph(List(1, 2, 3, 4, 5, 6))
 
         gc.addConnection(1, 2)
@@ -16,7 +16,8 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        println(gc.applyColors())
+        var result = gc.applyColors()
+        for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
     }
 
     class Graph(val vertices: List[Int]) {
@@ -25,22 +26,27 @@ object GraphColoring {
         this.vertices.foreach(this.graph += _ -> List())
 
         def graph() = _graph
-        def graph(g: Map[Int, List[Int]]) = { _graph = g }
 
-        def addConnection(s:Int, t:Int): Unit = {
+        def graph(g: Map[Int, List[Int]]) = {
+            _graph = g
+        }
+
+        def addConnection(s: Int, t: Int): Unit = {
             if (!vertices.contains(s)) return
             if (!vertices.contains(t)) return
 
             val g = this.graph()
-            def getConn(s: Int, t:Int) = {
+
+            def getConn(s: Int, t: Int) = {
                 (s -> (this.graph()(s) :+ t))
             }
+
             g += getConn(s, t)
             this.graph(g)
         }
 
-        def colorPicker(n: Int, used:List[Int]): Int = {
-            if(used.contains(n)) colorPicker(n + 1, used)
+        def colorPicker(n: Int, used: List[Int]): Int = {
+            if (used.contains(n)) colorPicker(n + 1, used)
             else n
         }
 
@@ -80,4 +86,10 @@ object GraphColoring {
             colored
         }
     }
+
 }
+
+//def getc(vertex: Int): Int = {
+//    used_colors :+ this.graph()(vertex).filter(e => colored.contains(e)).map(e => colored(e))
+//    (colorPicker(-1, used_colors))
+//}
