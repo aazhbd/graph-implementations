@@ -16,8 +16,6 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        //println(gc.colorPicker(0, List(0, 1, 2, 3, 4)))
-
         println(gc.applyColors())
     }
 
@@ -71,7 +69,7 @@ object GraphColoring {
 
             def getColor(vertex: Int): Int = {
                 this.graph()(vertex).foreach(e => {
-                    if(colored.contains(e)) {
+                    if (colored.contains(e)) {
                         used_colors = used_colors :+ colored(e)
                     }
                 })
@@ -82,5 +80,4 @@ object GraphColoring {
             colored
         }
     }
-
 }
