@@ -17,15 +17,11 @@ public class GreedyColoring {
     }
 
     public void addConnection(Integer f, Integer t) {
-        if (this.vertices.contains(f) && this.vertices.contains(t)) {
-            List<Integer> edges = this.graph.get(f);
+        if (!this.vertices.contains(f) || !this.vertices.contains(t)) return;
 
-            if (!edges.contains(t)) {
-                edges.add(t);
-            }
-
-            this.graph.put(f, edges);
-        }
+        List<Integer> edges = this.graph.get(f);
+        if (!edges.contains(t)) edges.add(t);
+        this.graph.put(f, edges);
     }
 
     public int pickColor(List<Integer> colors) {
