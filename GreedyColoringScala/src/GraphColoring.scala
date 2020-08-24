@@ -1,5 +1,4 @@
 import scala.collection.mutable
-import scala.collection.mutable.Map
 import scala.annotation.tailrec
 
 object GraphColoring {
@@ -48,25 +47,6 @@ object GraphColoring {
             this.graph(g)
         }
 
-        def applyColorsImper(): mutable.Map[Int, Int] = {
-            var colored = mutable.Map[Int, Int]()
-            var used_colors = List[Int]()
-
-            for (vertex <- this.vertices) {
-                var edges = this.graph()(vertex);
-
-                for (e <- edges) {
-                    if (colored.contains(e)) {
-                        used_colors = used_colors :+ colored(e)
-                    }
-                }
-
-                var color = (colorPicker(0, used_colors))
-                colored.put(vertex, color)
-            }
-            colored
-        }
-
         def applyColorsFunc(): mutable.Map[Int, Int] = {
             val colored = mutable.Map[Int, Int]()
 
@@ -108,3 +88,23 @@ object GraphColoring {
 //    this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
 //    colored
 //}
+//
+//def applyColorsImper(): mutable.Map[Int, Int] = {
+//    var colored = mutable.Map[Int, Int]()
+//    var used_colors = List[Int]()
+//
+//    for (vertex <- this.vertices) {
+//        var edges = this.graph()(vertex);
+//
+//        for (e <- edges) {
+//            if (colored.contains(e)) {
+//                used_colors = used_colors :+ colored(e)
+//            }
+//        }
+//
+//        var color = (colorPicker(0, used_colors))
+//        colored.put(vertex, color)
+//    }
+//    colored
+//}
+
