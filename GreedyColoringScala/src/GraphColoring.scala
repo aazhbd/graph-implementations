@@ -1,5 +1,6 @@
 import scala.collection.mutable
 import scala.collection.mutable.Map
+import scala.annotation.tailrec
 
 object GraphColoring {
 
@@ -32,6 +33,9 @@ object GraphColoring {
             _graph = g
         }
 
+        @tailrec
+        private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
+
         def addConnection(s: Int, t: Int): Unit = {
             if (!vertices.contains(s)) return
             if (!vertices.contains(t)) return
@@ -44,11 +48,6 @@ object GraphColoring {
 
             g += getConn(s, t)
             this.graph(g)
-        }
-
-        def colorPicker(n: Int, used: List[Int]): Int = {
-            if (used.contains(n)) colorPicker(n + 1, used)
-            else n
         }
 
         def applyColorsImper(): mutable.Map[Int, Int] = {
