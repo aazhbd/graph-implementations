@@ -53,7 +53,7 @@ object GraphColoring {
 
         def applyColorsImper(): mutable.Map[Int, Int] = {
             var colored = mutable.Map[Int, Int]()
-            var used_colors = List(-1)
+            var used_colors = List[Int]()
 
             for (vertex <- this.vertices) {
                 var edges = this.graph()(vertex);
@@ -64,7 +64,7 @@ object GraphColoring {
                     }
                 }
 
-                var color = (colorPicker(-1, used_colors))
+                var color = (colorPicker(0, used_colors))
                 colored.put(vertex, color)
             }
             colored
