@@ -25,13 +25,13 @@ object GraphColoring {
     class Graph(val vertices: List[Int]) {
         private var _graph = mutable.Map[Int, List[Int]]()
 
-        this.vertices.foreach(this.graph += _ -> List())
-
         def graph(): mutable.Map[Int, List[Int]] = _graph
 
         def graph(g: mutable.Map[Int, List[Int]]): Unit = {
             _graph = g
         }
+
+        this.vertices.foreach(this.graph += _ -> List())
 
         @tailrec
         private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
