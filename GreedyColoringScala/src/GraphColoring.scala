@@ -1,3 +1,4 @@
+import scala.collection.mutable
 import scala.collection.mutable.Map
 
 object GraphColoring {
@@ -21,13 +22,13 @@ object GraphColoring {
     }
 
     class Graph(val vertices: List[Int]) {
-        private var _graph = Map[Int, List[Int]]()
+        private var _graph = mutable.Map[Int, List[Int]]()
 
         this.vertices.foreach(this.graph += _ -> List())
 
-        def graph() = _graph
+        def graph(): mutable.Map[Int, List[Int]] = _graph
 
-        def graph(g: Map[Int, List[Int]]) = {
+        def graph(g: mutable.Map[Int, List[Int]]): Unit = {
             _graph = g
         }
 
@@ -50,8 +51,8 @@ object GraphColoring {
             else n
         }
 
-        def applyColorsImper(): Map[Int, Int] = {
-            var colored = Map[Int, Int]()
+        def applyColorsImper(): mutable.Map[Int, Int] = {
+            var colored = mutable.Map[Int, Int]()
             var used_colors = List(-1)
 
             for (vertex <- this.vertices) {
@@ -69,8 +70,8 @@ object GraphColoring {
             colored
         }
 
-        def applyColors(): Map[Int, Int] = {
-            val colored = Map[Int, Int]()
+        def applyColors(): mutable.Map[Int, Int] = {
+            val colored = mutable.Map[Int, Int]()
             var used_colors = List(-1)
 
             def getColor(vertex: Int): Int = {
