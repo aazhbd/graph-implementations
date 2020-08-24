@@ -18,7 +18,7 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        var result = gc.applyColors()
+        var result = gc.applyColorsFunc()
         for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
     }
 
@@ -83,6 +83,20 @@ object GraphColoring {
             }
 
             this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
+            colored
+        }
+
+        def applyColorsFunc(): mutable.Map[Int, Int] = {
+            val colored = mutable.Map[Int, Int]()
+
+            def getColor(vertex: Int): Int = {
+                val used_colors = this.graph()(vertex).collect {
+                    case e if (colored.contains(e)) => colored(e)
+                }
+                (colorPicker(0, used_colors))
+            }
+
+            this.vertices.map(vertex => { colored.put(vertex, getColor(vertex)) })
             colored
         }
     }
