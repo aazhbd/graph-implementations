@@ -67,23 +67,6 @@ object GraphColoring {
             colored
         }
 
-        def applyColors(): mutable.Map[Int, Int] = {
-            val colored = mutable.Map[Int, Int]()
-            var used_colors = List[Int]()
-
-            def getColor(vertex: Int): Int = {
-                this.graph()(vertex).foreach(e => {
-                    if (colored.contains(e)) {
-                        used_colors = used_colors :+ colored(e)
-                    }
-                })
-                (colorPicker(0, used_colors))
-            }
-
-            this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
-            colored
-        }
-
         def applyColorsFunc(): mutable.Map[Int, Int] = {
             val colored = mutable.Map[Int, Int]()
 
@@ -106,4 +89,22 @@ object GraphColoring {
 //def getc(vertex: Int): Int = {
 //    used_colors :+ this.graph()(vertex).filter(e => colored.contains(e)).map(e => colored(e))
 //    (colorPicker(-1, used_colors))
+//}
+//
+//
+//def applyColors(): mutable.Map[Int, Int] = {
+//    val colored = mutable.Map[Int, Int]()
+//    var used_colors = List[Int]()
+//
+//    def getColor(vertex: Int): Int = {
+//        this.graph()(vertex).foreach(e => {
+//            if (colored.contains(e)) {
+//                used_colors = used_colors :+ colored(e)
+//            }
+//        })
+//        (colorPicker(0, used_colors))
+//    }
+//
+//    this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
+//    colored
 //}
