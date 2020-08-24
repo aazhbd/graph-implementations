@@ -70,15 +70,15 @@ object GraphColoring {
         def applyColorsFunc(): mutable.Map[Int, Int] = {
             val colored = mutable.Map[Int, Int]()
 
-            def get_used_colors(vertex: Int): List[Int] = {
-                val used_colors = this.graph()(vertex).collect {
+            def getUsedColors(vertex: Int): List[Int] = {
+                val usedColors = this.graph()(vertex).collect {
                     case e if colored.contains(e) => colored(e)
                 }
-                used_colors
+                usedColors
             }
 
             this.vertices.map(vertex => {
-                colored.put(vertex, colorPicker(0, get_used_colors(vertex)))
+                colored.put(vertex, colorPicker(0, getUsedColors(vertex)))
             })
             colored
         }
