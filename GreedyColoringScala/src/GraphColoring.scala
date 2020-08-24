@@ -23,7 +23,7 @@ object GraphColoring {
     }
 
     class Graph(val vertices: List[Int]) {
-        private var _graph = mutable.Map[Int, List[Int]]()
+        private var _graph: mutable.Map[Int, List[Int]] = mutable.Map[Int, List[Int]]()
 
         def graph(): mutable.Map[Int, List[Int]] = _graph
 
@@ -42,9 +42,7 @@ object GraphColoring {
 
             val g = this.graph()
 
-            def getConn(s: Int, t: Int) = {
-                (s -> (this.graph()(s) :+ t))
-            }
+            def getConn(s: Int, t: Int): (Int, List[Int]) = s -> (this.graph()(s) :+ t)
 
             g += getConn(s, t)
             this.graph(g)
