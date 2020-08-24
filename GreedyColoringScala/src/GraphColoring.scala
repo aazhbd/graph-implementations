@@ -72,7 +72,7 @@ object GraphColoring {
 
         def applyColors(): mutable.Map[Int, Int] = {
             val colored = mutable.Map[Int, Int]()
-            var used_colors = List(-1)
+            var used_colors = List[Int]()
 
             def getColor(vertex: Int): Int = {
                 this.graph()(vertex).foreach(e => {
@@ -80,7 +80,7 @@ object GraphColoring {
                         used_colors = used_colors :+ colored(e)
                     }
                 })
-                (colorPicker(-1, used_colors))
+                (colorPicker(0, used_colors))
             }
 
             this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
