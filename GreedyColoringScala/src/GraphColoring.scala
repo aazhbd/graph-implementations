@@ -91,9 +91,9 @@ object GraphColoring {
 
             def getColor(vertex: Int): Int = {
                 val used_colors = this.graph()(vertex).collect {
-                    case e if (colored.contains(e)) => colored(e)
+                    case e if colored.contains(e) => colored(e)
                 }
-                (colorPicker(0, used_colors))
+                colorPicker(0, used_colors)
             }
 
             this.vertices.map(vertex => { colored.put(vertex, getColor(vertex)) })
