@@ -55,28 +55,26 @@ object GraphColoring {
         private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
         def addConnection(s: Int, t: Int): Unit = {
-            if (!vertices.contains(s)) return
-            if (!vertices.contains(t)) return
-
+            if (!vertices.contains(s) || !vertices.contains(t)) return
             val g = this.graph()
             g += s -> (this.graph()(s) :+ t)
             this.graph(g)
         }
 
         def applyColorsFunc(): mutable.Map[Int, Int] = {
-            val colored = mutable.Map[Int, Int]()
+            val coloredGraph = mutable.Map[Int, Int]()
 
             def getUsedColors(vertex: Int): List[Int] = {
                 val usedColors = this.graph()(vertex).collect {
-                    case e if colored.contains(e) => colored(e)
+                    case e if coloredGraph.contains(e) => coloredGraph(e)
                 }
                 usedColors
             }
 
             this.vertices.map(vertex => {
-                colored.put(vertex, colorPicker(0, getUsedColors(vertex)))
+                coloredGraph.put(vertex, colorPicker(0, getUsedColors(vertex)))
             })
-            colored
+            coloredGraph
         }
     }
 
