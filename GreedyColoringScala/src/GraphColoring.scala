@@ -27,8 +27,7 @@ object GraphColoring {
 
         val infile = Source.fromFile("/home/expressions/Downloads/in.txt")
         val lines = infile.getLines().toList
-        val vs = lines.head.toString.split("\\s+").map(_.toInt).toList
-        val colorGraph = new Graph(vs)
+        val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
 
         for(c <- lines.tail) {
             val ed = c.toString.split("\\s+").map(_.toInt).toList
