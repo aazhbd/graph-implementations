@@ -29,7 +29,7 @@ object GraphColoring {
         val lines = infile.getLines().toList
         val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
 
-        for(c <- lines.tail) {
+        for (c <- lines.tail) {
             val ed = c.toString.split("\\s+").map(_.toInt).toList
             colorGraph.addConnection(ed.head, ed(1))
         }
