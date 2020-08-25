@@ -18,7 +18,7 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        val result = gc.applyColorsFunc()
+        val result: mutable.Map[Int, Int] = applyColorsFunc(gc.graph(), gc.vertices)
         for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
 
         // test cases from files.
@@ -34,7 +34,7 @@ object GraphColoring {
             colorGraph.addConnection(ed.head, ed(1))
         }
 
-        val colors = colorGraph.applyColorsFunc()
+        val colors: mutable.Map[Int, Int] = applyColorsFunc(colorGraph.graph(), colorGraph.vertices)
         for ((k, v) <- colors) printf("vertex: %s, color: %s\n", k, v)
 
         infile.close()
@@ -53,29 +53,27 @@ object GraphColoring {
 
         def addConnection(s: Int, t: Int): Unit = {
             if (!vertices.contains(s) || !vertices.contains(t)) return
-            val g = this.graph()
-            g += s -> (this.graph()(s) :+ t)
-            this.graph(g)
+            this.graph += s -> (this.graph()(s) :+ t)
         }
+    }
 
-        @tailrec
-        private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
+    @tailrec
+    private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
-        def applyColorsFunc(): mutable.Map[Int, Int] = {
-            val coloredGraph = mutable.Map[Int, Int]()
+    def applyColorsFunc(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
+        val coloredGraph = mutable.Map[Int, Int]()
 
-            def getUsedColors(vertex: Int): List[Int] = {
-                val usedColors = this.graph()(vertex).collect {
-                    case e if coloredGraph.contains(e) => coloredGraph(e)
-                }
-                usedColors
+        def getUsedColors(vertex: Int): List[Int] = {
+            val usedColors = graph(vertex).collect {
+                case e if coloredGraph.contains(e) => coloredGraph(e)
             }
-
-            this.vertices.map(vertex => {
-                coloredGraph.put(vertex, colorPicker(0, getUsedColors(vertex)))
-            })
-            coloredGraph
+            usedColors
         }
+
+        vertices.map(vertex => {
+            coloredGraph.put(vertex, colorPicker(0, getUsedColors(vertex)))
+        })
+        coloredGraph
     }
 
 }
