@@ -25,7 +25,7 @@ object GraphColoring {
 
         println("\nGraph from file\n")
 
-        val infile = Source.fromFile("/home/expressions/Downloads/in.txt")
+        val infile = Source.fromFile("/home/expressions/Downloads/GraphInputs/completegraph.txt")
         val lines = infile.getLines().toList
         val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
 
@@ -51,15 +51,15 @@ object GraphColoring {
 
         this.vertices.foreach(this.graph += _ -> List())
 
-        @tailrec
-        private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
-
         def addConnection(s: Int, t: Int): Unit = {
             if (!vertices.contains(s) || !vertices.contains(t)) return
             val g = this.graph()
             g += s -> (this.graph()(s) :+ t)
             this.graph(g)
         }
+
+        @tailrec
+        private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
         def applyColorsFunc(): mutable.Map[Int, Int] = {
             val coloredGraph = mutable.Map[Int, Int]()
