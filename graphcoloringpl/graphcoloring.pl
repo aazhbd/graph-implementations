@@ -11,6 +11,11 @@ edge(two, three).
 edge(one, three).
 edge(two, one).
 edge(three, one).
+edge(four, one).
+edge(four, two).
+edge(three, five).
+edge(five, one).
+edge(five, four).
 
 color(one).
 color(two).
