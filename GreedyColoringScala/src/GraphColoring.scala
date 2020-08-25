@@ -5,7 +5,7 @@ import scala.io.Source
 object GraphColoring {
 
     def main(args: Array[String]) {
-        var gc = new Graph(List(1, 2, 3, 4, 5, 6))
+        val gc = new Graph(List(1, 2, 3, 4, 5, 6))
 
         gc.addConnection(1, 2)
         gc.addConnection(1, 3)
@@ -18,24 +18,26 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        var result = gc.applyColorsFunc()
+        val result = gc.applyColorsFunc()
         for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
 
-        ////// test cases from files.
+        // test cases from files.
 
         println("\nGraph from file\n")
 
         val infile = Source.fromFile("/home/expressions/Downloads/in.txt")
-        var lines = infile.getLines().toList
-        var vs = lines.head.toString.split("\\s+").map(_.toInt).toList
-        var colorGraph = new Graph(vs)
+        val lines = infile.getLines().toList
+        val vs = lines.head.toString.split("\\s+").map(_.toInt).toList
+        val colorGraph = new Graph(vs)
 
         for(c <- lines.tail) {
-            var ed = c.toString.split("\\s+").map(_.toInt).toList
+            val ed = c.toString.split("\\s+").map(_.toInt).toList
             colorGraph.addConnection(ed.head, ed(1))
         }
-        var colors = colorGraph.applyColorsFunc()
+
+        val colors = colorGraph.applyColorsFunc()
         for ((k, v) <- colors) printf("vertex: %s, color: %s\n", k, v)
+
         infile.close()
     }
 
