@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class GreedyColoring {
-    public static final String input = "in.txt";
+    public static final String input = "/home/expressions/Downloads/GraphInputs/crowngraph.txt";
     private HashMap<Integer, List<Integer>> graph;
     private List<Integer> vertices;
 

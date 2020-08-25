@@ -5,29 +5,30 @@ vertex(two).
 vertex(three).
 vertex(four).
 vertex(five).
+vertex(six).
 
-edge(one, two).
-edge(two, three).
-edge(one, three).
-edge(two, one).
-edge(three, one).
-edge(four, one).
-edge(four, two).
-edge(three, five).
-edge(five, one).
-edge(five, four).
+connection(one, two).
+connection(one, three).
+connection(two, four).
+connection(two, five).
+connection(three, five).
+connection(four, one).
+connection(five, two).
+connection(five, four).
+connection(six, three).
+connection(six, four).
 
-color(one).
-color(two).
-color(three).
+color(red).
+color(green).
+color(blue).
 
 
 colorGraph(ColorList) :- 
-  findall((X, Y), edge(X, Y), Edges),
-  findall(X, vertex(X), Vertexes),
-  findall(hasColor(X, _), member(X, Vertexes), ColorList),
-  createConstraint(Edges,ColorList),
-  colorNodes(ColorList).
+  findall((X, Y), connection(X, Y), Connections),
+  findall(X, vertex(X), Vertices),
+  findall(hasColor(X, _), member(X, Vertices), ColorList),
+  createConstraint(Connections, ColorList),
+  applyColors(ColorList).
 
 createConstraint([],_).
 
@@ -37,10 +38,10 @@ createConstraint([(V1,V2)|RL],ColorList):-
   dif(C1,C2),
   createConstraint(RL,ColorList).
 
-colorNodes([]).
+applyColors([]).
 
-colorNodes([hasColor(_,C)|Nodes]) :-
+applyColors([hasColor(_,C)|Nodes]) :-
   color(C),
-  colorNodes(Nodes).
+  applyColors(Nodes).
 
 
