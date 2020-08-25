@@ -1,5 +1,6 @@
 import scala.collection.mutable
 import scala.annotation.tailrec
+import scala.io.Source
 
 object GraphColoring {
 
@@ -19,6 +20,23 @@ object GraphColoring {
 
         var result = gc.applyColorsFunc()
         for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
+
+        ////// test cases from files.
+
+        println("\nGraph from file\n")
+
+        val infile = Source.fromFile("/home/expressions/Downloads/in.txt")
+        var lines = infile.getLines().toList
+        var vs = lines.head.toString.split("\\s+").map(_.toInt).toList
+        var colorGraph = new Graph(vs)
+
+        for(c <- lines.tail) {
+            var ed = c.toString.split("\\s+").map(_.toInt).toList
+            colorGraph.addConnection(ed.head, ed(1))
+        }
+        var colors = colorGraph.applyColorsFunc()
+        for ((k, v) <- colors) printf("vertex: %s, color: %s\n", k, v)
+        infile.close()
     }
 
     class Graph(val vertices: List[Int]) {
@@ -40,10 +58,7 @@ object GraphColoring {
             if (!vertices.contains(t)) return
 
             val g = this.graph()
-
-            def getConn(s: Int, t: Int): (Int, List[Int]) = s -> (this.graph()(s) :+ t)
-
-            g += getConn(s, t)
+            g += s -> (this.graph()(s) :+ t)
             this.graph(g)
         }
 
