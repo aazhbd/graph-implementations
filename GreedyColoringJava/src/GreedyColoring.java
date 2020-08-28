@@ -24,7 +24,7 @@ public class GreedyColoring {
         this.graph.put(f, edges);
     }
 
-    public int pickColor(List<Integer> colors) {
+    public int pickColor(HashSet<Integer> colors) {
         for (int c = 0; ; c++) {
             if (!colors.contains(c)) {
                 return c;
@@ -34,7 +34,7 @@ public class GreedyColoring {
 
     public HashMap<Integer, Integer> applyColors() {
         HashMap<Integer, Integer> colored = new HashMap<Integer, Integer>();
-        List<Integer> used_colors = new ArrayList<Integer>();
+        HashSet<Integer> used_colors = new HashSet<Integer>();
 
         for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
