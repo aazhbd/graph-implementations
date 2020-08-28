@@ -18,14 +18,14 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        val result: mutable.Map[Int, Int] = applyColorsFunc(gc.graph(), gc.vertices)
+        val result: mutable.Map[Int, Int] = applyColors(gc.graph(), gc.vertices)
         for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
 
         // test cases from files.
 
         println("\nGraph from file\n")
 
-        val infile = Source.fromFile("/home/expressions/Downloads/GraphInputs/completegraph.txt")
+        val infile = Source.fromFile("E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt")
         val lines = infile.getLines().toList
         val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
 
@@ -34,7 +34,7 @@ object GraphColoring {
             colorGraph.addConnection(ed.head, ed(1))
         }
 
-        val colors: mutable.Map[Int, Int] = applyColorsFunc(colorGraph.graph(), colorGraph.vertices)
+        val colors: mutable.Map[Int, Int] = applyColors(colorGraph.graph(), colorGraph.vertices)
         for ((k, v) <- colors) printf("vertex: %s, color: %s\n", k, v)
 
         infile.close()
@@ -60,7 +60,7 @@ object GraphColoring {
     @tailrec
     private def colorPicker(n: Int, used: Set[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
-    def applyColorsFunc(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
+    def applyColors(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
         val coloredGraph = mutable.Map[Int, Int]()
 
         def getUsedColors(vertex: Int): Set[Int] = {
