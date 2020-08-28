@@ -58,15 +58,15 @@ object GraphColoring {
     }
 
     @tailrec
-    private def colorPicker(n: Int, used: List[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
+    private def colorPicker(n: Int, used: Set[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
     def applyColorsFunc(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
         val coloredGraph = mutable.Map[Int, Int]()
 
-        def getUsedColors(vertex: Int): List[Int] = {
-            val usedColors = graph(vertex).collect {
+        def getUsedColors(vertex: Int): Set[Int] = {
+            val usedColors: Set[Int] = graph(vertex).collect {
                 case e if coloredGraph.contains(e) => coloredGraph(e)
-            }
+            }.toSet
             usedColors
         }
 
