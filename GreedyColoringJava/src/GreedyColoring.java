@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class GreedyColoring {
-    public static final String input = "/home/expressions/Downloads/GraphInputs/crowngraph.txt";
+    public static final String input = "E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt";
     private HashMap<Integer, List<Integer>> graph;
     private List<Integer> vertices;
 
@@ -34,10 +34,10 @@ public class GreedyColoring {
 
     public HashMap<Integer, Integer> applyColors() {
         HashMap<Integer, Integer> colored = new HashMap<Integer, Integer>();
-        HashSet<Integer> used_colors = new HashSet<Integer>();
 
         for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
+            HashSet<Integer> used_colors = new HashSet<Integer>();
 
             for (int e : edges) {
                 if (colored.containsKey(e)) {
