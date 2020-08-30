@@ -23,13 +23,6 @@ color(green).
 color(blue).
 
 
-colorGraph(ColorList) :- 
-  findall((X, Y), connection(X, Y), Connections),
-  findall(X, vertex(X), Vertices),
-  findall(hasColor(X, _), member(X, Vertices), ColorList),
-  createConstraint(Connections, ColorList),
-  applyColors(ColorList).
-
 createConstraint([],_).
 
 createConstraint([(V1,V2)|RL],ColorList):-
@@ -37,6 +30,15 @@ createConstraint([(V1,V2)|RL],ColorList):-
   member(hasColor(V2,C2),ColorList),
   dif(C1,C2),
   createConstraint(RL,ColorList).
+
+
+colorGraph(ColorList) :- 
+  findall((X, Y), connection(X, Y), Connections),
+  findall(X, vertex(X), Vertices),
+  findall(hasColor(X, _), member(X, Vertices), ColorList),
+  createConstraint(Connections, ColorList),
+  applyColors(ColorList).
+
 
 applyColors([]).
 
