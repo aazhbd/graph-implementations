@@ -6,7 +6,7 @@ public class GreedyColoring {
     private HashMap<Integer, List<Integer>> graph;
     private List<Integer> vertices;
 
-    public GreedyColoring(Integer v[]) {
+    public GreedyColoring(Integer[] v) {
         this.vertices = Arrays.asList(v);
 
         this.graph = new HashMap<Integer, List<Integer>>();
