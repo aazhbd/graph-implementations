@@ -2,13 +2,11 @@ import java.util.*;
 import java.io.*;
 
 public class GreedyColoring {
-    public static final String input = "E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt";
     private HashMap<Integer, List<Integer>> graph;
     private List<Integer> vertices;
 
-    public GreedyColoring(Integer[] v) {
-        this.vertices = Arrays.asList(v);
-
+    public GreedyColoring(List<Integer> v) {
+        this.vertices = v;
         this.graph = new HashMap<Integer, List<Integer>>();
 
         for (int vertex : this.vertices) {
@@ -69,6 +67,7 @@ public class GreedyColoring {
     }
 
     public static void main(String[] args) {
+        String input = "E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt";
         FileInputStream instr = null;
 
         try {
@@ -83,7 +82,7 @@ public class GreedyColoring {
         int[] vs = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
         Integer[] Vs = Arrays.stream(vs).boxed().toArray(Integer[]::new);
 
-        GreedyColoring graph = new GreedyColoring(Vs);
+        GreedyColoring graph = new GreedyColoring(Arrays.asList(Vs));
 
         while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
@@ -95,7 +94,7 @@ public class GreedyColoring {
 
         graph.printColors(graph.applyColors());
 
-        GreedyColoring gc = new GreedyColoring(new Integer[]{1, 2, 3, 4, 5, 6});
+        GreedyColoring gc = new GreedyColoring(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         gc.addConnection(1, 2);
         gc.addConnection(1, 3);
