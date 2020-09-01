@@ -42,10 +42,8 @@ public class GreedyColoring {
                     used_colors.add(colored.get(e));
                 }
             }
-
             colored.put(vertex, pickColor(used_colors));
         }
-
         return colored;
     }
 
