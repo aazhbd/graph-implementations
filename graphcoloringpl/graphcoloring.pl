@@ -32,7 +32,7 @@ createConstraint([(V1,V2)|RL],ColorList):-
   createConstraint(RL,ColorList).
 
 
-colorGraph(ColorList) :- 
+colorGraph(ColorList):-
   findall((X, Y), connection(X, Y), Connections),
   findall(X, vertex(X), Vertices),
   findall(hasColor(X, _), member(X, Vertices), ColorList),
@@ -42,7 +42,7 @@ colorGraph(ColorList) :-
 
 applyColors([]).
 
-applyColors([hasColor(_,C)|Nodes]) :-
+applyColors([hasColor(_,C)|Nodes]):-
   color(C),
   applyColors(Nodes).
 
