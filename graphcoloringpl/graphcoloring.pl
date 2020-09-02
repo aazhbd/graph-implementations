@@ -23,13 +23,13 @@ color(green).
 color(blue).
 
 
-createConstraint([],_).
+createConstraint([], _).
 
-createConstraint([(V1,V2)|RL],ColorList):-
-  member(hasColor(V1,C1),ColorList),
-  member(hasColor(V2,C2),ColorList),
-  dif(C1,C2),
-  createConstraint(RL,ColorList).
+createConstraint([(S, T) | R], ColorList):-
+  member(hasColor(S, Color1), ColorList),
+  member(hasColor(T, Color2), ColorList),
+  dif(Color1, Color2),
+  createConstraint(R, ColorList).
 
 
 colorGraph(ColorList):-
@@ -42,8 +42,7 @@ colorGraph(ColorList):-
 
 applyColors([]).
 
-applyColors([hasColor(_,C)|Nodes]):-
+applyColors([hasColor(_, C) | Nodes]):-
   color(C),
   applyColors(Nodes).
-
 
