@@ -19,7 +19,7 @@ object GraphColoring {
         gc.addConnection(6, 4)
 
         val result: mutable.Map[Int, Int] = applyColors(gc.graph(), gc.vertices)
-        for ((k, v) <- result) printf("vertex: %s, color: %s\n", k, v)
+        for ((k, v) <- result) printf("vertex: %s has color: %s\n", k, v)
 
         // test cases from files.
 
@@ -35,7 +35,7 @@ object GraphColoring {
         }
 
         val colors: mutable.Map[Int, Int] = applyColors(colorGraph.graph(), colorGraph.vertices)
-        for ((k, v) <- colors) printf("vertex: %s, color: %s\n", k, v)
+        for ((k, v) <- colors) printf("vertex: %s has color: %s\n", k, v)
 
         infile.close()
     }
