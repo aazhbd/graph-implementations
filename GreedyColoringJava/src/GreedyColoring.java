@@ -3,9 +3,9 @@ import java.io.*;
 
 public class GreedyColoring {
     private HashMap<Integer, List<Integer>> graph;
-    private HashSet<Integer> vertices;
+    private List<Integer> vertices;
 
-    public GreedyColoring(HashSet<Integer> v) {
+    public GreedyColoring(List<Integer> v) {
         this.vertices = v;
         this.graph = new HashMap<Integer, List<Integer>>();
 
@@ -80,7 +80,7 @@ public class GreedyColoring {
         int[] vs = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
         Integer[] Vs = Arrays.stream(vs).boxed().toArray(Integer[]::new);
 
-        GreedyColoring graph = new GreedyColoring(new HashSet<Integer>(Arrays.asList(Vs)));
+        GreedyColoring graph = new GreedyColoring(Arrays.asList(Vs));
 
         while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
@@ -92,8 +92,7 @@ public class GreedyColoring {
 
         graph.printColors(graph.applyColors());
 
-        GreedyColoring gc = new GreedyColoring(new HashSet<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-
+        GreedyColoring gc = new GreedyColoring(Arrays.asList(6, 5, 4, 3, 2, 1));
         gc.addConnection(1, 2);
         gc.addConnection(1, 3);
         gc.addConnection(2, 4);
