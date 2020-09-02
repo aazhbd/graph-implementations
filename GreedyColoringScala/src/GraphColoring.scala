@@ -5,7 +5,7 @@ import scala.io.Source
 object GraphColoring {
 
     def main(args: Array[String]) {
-        val gc = new Graph(List(1, 2, 3, 4, 5, 6))
+        val gc = new Graph(Set(1, 2, 3, 4, 5, 6))
 
         gc.addConnection(1, 2)
         gc.addConnection(1, 3)
@@ -27,7 +27,7 @@ object GraphColoring {
 
         val infile = Source.fromFile("E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt")
         val lines = infile.getLines().toList
-        val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
+        val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toSet)
 
         for (c <- lines.tail) {
             val ed = c.toString.split("\\s+").map(_.toInt).toList
@@ -40,7 +40,7 @@ object GraphColoring {
         infile.close()
     }
 
-    class Graph(val vertices: List[Int]) {
+    class Graph(val vertices: Set[Int]) {
         private var _graph: mutable.Map[Int, List[Int]] = mutable.Map[Int, List[Int]]()
 
         def graph(): mutable.Map[Int, List[Int]] = _graph
@@ -60,7 +60,7 @@ object GraphColoring {
     @tailrec
     private def colorPicker(n: Int, used: Set[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
 
-    def applyColors(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
+    def applyColors(graph: mutable.Map[Int, List[Int]], vertices: Set[Int]): mutable.Map[Int, Int] = {
         val coloredGraph = mutable.Map[Int, Int]()
 
         def getUsedColors(vertex: Int): Set[Int] = {
