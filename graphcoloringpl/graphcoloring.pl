@@ -1,48 +1,45 @@
-:- use_module(library(clpfd)). 
+vertex(1).
+vertex(2).
+vertex(3).
+vertex(4).
+vertex(5).
+vertex(6).
 
-vertex(one).
-vertex(two).
-vertex(three).
-vertex(four).
-vertex(five).
-vertex(six).
+connection(1,2).
+connection(1,3).
+connection(2,4).
+connection(2,5).
+connection(3,5).
+connection(4,1).
+connection(5,2).
+connection(5,4).
+connection(6,3).
+connection(6,4).
 
-connection(one, two).
-connection(one, three).
-connection(two, four).
-connection(two, five).
-connection(three, five).
-connection(four, one).
-connection(five, two).
-connection(five, four).
-connection(six, three).
-connection(six, four).
+color(0).
+color(1).
+color(2).
 
-color(red).
-color(green).
-color(blue).
+setCondition([], _).
 
-
-createConstraint([], _).
-
-createConstraint([(S, T) | R], ColorList):-
-  member(hasColor(S, Color1), ColorList),
-  member(hasColor(T, Color2), ColorList),
-  dif(Color1, Color2),
-  createConstraint(R, ColorList).
-
-
-colorGraph(ColorList):-
-  findall((X, Y), connection(X, Y), Connections),
-  findall(X, vertex(X), Vertices),
-  findall(hasColor(X, _), member(X, Vertices), ColorList),
-  createConstraint(Connections, ColorList),
-  applyColors(ColorList).
+setCondition([(S, T) | R], ColorList):-
+    member(colorAssigned(S, Color1), ColorList),
+    member(colorAssigned(T, Color2), ColorList),
+    dif(Color1, Color2), setCondition(R, ColorList).
 
 
 applyColors([]).
 
-applyColors([hasColor(_, C) | Nodes]):-
-  color(C),
-  applyColors(Nodes).
+applyColors([colorAssigned(_, C) | Nodes]):-
+    color(C), applyColors(Nodes).
+
+
+main(ColorList):-
+    findall((X, Y), connection(X, Y), Connections),
+    findall(X, vertex(X), Vertices),
+    findall(colorAssigned(X, _),
+            member(X, Vertices),
+            ColorList),
+    setCondition(Connections, ColorList),
+    applyColors(ColorList).
 
