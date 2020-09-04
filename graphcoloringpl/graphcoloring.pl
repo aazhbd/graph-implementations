@@ -1,5 +1,5 @@
 
-
+%Graph representation
 vertex(1).
 vertex(2).
 vertex(3).
