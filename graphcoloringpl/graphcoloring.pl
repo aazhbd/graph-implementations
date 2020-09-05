@@ -7,16 +7,16 @@ vertex(4).
 vertex(5).
 vertex(6).
 
-connection(1,2).
-connection(1,3).
-connection(2,4).
-connection(2,5).
-connection(3,5).
-connection(4,1).
-connection(5,2).
-connection(5,4).
-connection(6,3).
-connection(6,4).
+connection(1, 2).
+connection(1, 3).
+connection(2, 4).
+connection(2, 5).
+connection(3, 5).
+connection(4, 1).
+connection(5, 2).
+connection(5, 4).
+connection(6, 3).
+connection(6, 4).
 
 color(0).
 color(1).

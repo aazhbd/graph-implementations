@@ -1,3 +1,6 @@
+
+% graph coloring simple in progress
+
 coloring(A, B, C, D, E, F):-
   connected(A, B),
   connected(A, C),
