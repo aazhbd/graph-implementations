@@ -17,9 +17,13 @@ public class GreedyColoring {
     public void addConnection(Integer f, Integer t) {
         if (!this.vertices.contains(f) || !this.vertices.contains(t)) return;
 
-        List<Integer> edges = this.graph.get(f);
-        if (!edges.contains(t)) edges.add(t);
-        this.graph.put(f, edges);
+        List<Integer> fedges = this.graph.get(f);
+        if (!fedges.contains(t)) fedges.add(t);
+        this.graph.put(f, fedges);
+
+        List<Integer> tedges = this.graph.get(t);
+        if (!tedges.contains(f)) tedges.add(f);
+        this.graph.put(t, tedges);
     }
 
     public int pickColor(HashSet<Integer> colors) {
@@ -85,7 +89,6 @@ public class GreedyColoring {
         while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
             graph.addConnection(eg[0], eg[1]);
-            graph.addConnection(eg[1], eg[0]);
         }
 
         graph.printGraph();
