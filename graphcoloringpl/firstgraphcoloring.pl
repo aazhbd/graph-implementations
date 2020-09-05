@@ -13,11 +13,8 @@ coloring(A, B, C, D, E, F):-
   connected(D, E),
   connected(E, F).
 
-
 connected(X, Y):-
     color(X), color(Y), (X \= Y).
 
 color(X):-
-    member(X, [red, blue, green, yellow]).
-
-
+    member(X, [0, 1, 2, 3]).
