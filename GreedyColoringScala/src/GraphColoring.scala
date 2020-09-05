@@ -5,7 +5,7 @@ import scala.io.Source
 object GraphColoring {
 
     def main(args: Array[String]) {
-        val gc = new Graph(List(6, 5, 4, 3, 2, 1))
+        val gc = new Graph(List(1, 2, 3, 4, 5, 6))
 
         gc.addConnection(1, 2)
         gc.addConnection(1, 3)
@@ -54,6 +54,7 @@ object GraphColoring {
         def addConnection(s: Int, t: Int): Unit = {
             if (!vertices.contains(s) || !vertices.contains(t)) return
             this.graph += s -> (this.graph()(s) :+ t)
+            this.graph += t -> (this.graph()(t) :+ s)
         }
     }
 
