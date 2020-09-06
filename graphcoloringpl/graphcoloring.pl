@@ -32,8 +32,8 @@ setCondition([(S, T) | R], ColorList):-
 
 applyColors([]).
 
-applyColors([colorAssigned(_, C) | Nodes]):-
-    color(C), applyColors(Nodes).
+applyColors([colorAssigned(_, V) | Vertex]):-
+    color(V), applyColors(Vertex).
 
 
 main(ColorList):-
