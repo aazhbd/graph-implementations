@@ -6,7 +6,6 @@
  * lists from file or manually created objects.
  * @author Abdullah Al Zakir Hossain, August 2020
  */
-
 import scala.collection.mutable
 import scala.annotation.tailrec
 import scala.io.Source
