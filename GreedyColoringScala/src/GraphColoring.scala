@@ -72,6 +72,10 @@ object GraphColoring {
         infile.close()
     }
 
+    /** The class to contain the adjacency list information
+     *
+     * @param vertices graph vertex ordering.
+     */
     class Graph(val vertices: List[Int]) {
         private var _graph: mutable.Map[Int, List[Int]] = mutable.Map[Int, List[Int]]()
 
@@ -90,10 +94,22 @@ object GraphColoring {
         }
     }
 
+    /** Finding the smallest available color.
+     *
+     * @param n    Initial color
+     * @param used Already used colors
+     * @return
+     */
     @tailrec
     private def colorPicker(n: Int, used: Set[Int]): Int =
         if (!used.contains(n)) n else colorPicker(n + 1, used)
 
+    /** Applies the colors on vertices
+     *
+     * @param graph    graph edges
+     * @param vertices vertex ordering
+     * @return
+     */
     def applyColors(graph: mutable.Map[Int,
         List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
         val coloredGraph = mutable.Map[Int, Int]()
