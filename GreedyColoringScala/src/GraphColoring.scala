@@ -1,3 +1,14 @@
+// blank line
+
+/**
+ * Implementation of greedy graph coloring in Scala
+ *
+ * The code produces colored graphs from input adjacency
+ * lists from file or manually created objects.
+ *
+ * Developed by Abdullah Al Zakir Hossain, August 2020
+ */
+
 import scala.collection.mutable
 import scala.annotation.tailrec
 import scala.io.Source
@@ -18,24 +29,41 @@ object GraphColoring {
         gc.addConnection(6, 3)
         gc.addConnection(6, 4)
 
-        val result: mutable.Map[Int, Int] = applyColors(gc.graph(), gc.vertices)
-        for ((k, v) <- result) printf("vertex: %s has color: %s\n", k, v)
+        val result: mutable.Map[Int, Int] = applyColors(
+            gc.graph(),
+            gc.vertices)
 
-        // test cases from files.
+        for ((k, v) <- result)
+            printf("vertex: %s has color: %s\n", k, v)
 
         println("\nGraph from file\n")
-
-        val infile = Source.fromFile("E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt")
+        /**
+         * Test cases from files. The string with file name needs to be
+         * updated for different graph. The file should contain a line
+         * of ordering values and adjacency list of the graph.
+         */
+        val infile = Source.fromFile("/home/abdullah/Documents/GraphInputs/completegraph.txt")
         val lines = infile.getLines().toList
-        val colorGraph = new Graph(lines.head.toString.split("\\s+").map(_.toInt).toList)
+        val colorGraph = new Graph(
+            lines
+                .head
+                .toString
+                .split("\\s+")
+                .map(_.toInt).toList)
 
         for (c <- lines.tail) {
-            val ed = c.toString.split("\\s+").map(_.toInt).toList
+            val ed = c.toString
+                .split("\\s+")
+                .map(_.toInt).toList
             colorGraph.addConnection(ed.head, ed(1))
         }
 
-        val colors: mutable.Map[Int, Int] = applyColors(colorGraph.graph(), colorGraph.vertices)
-        for ((k, v) <- colors) printf("vertex: %s has color: %s\n", k, v)
+        val colors: mutable.Map[Int, Int] = applyColors(
+            colorGraph.graph(),
+            colorGraph.vertices)
+
+        for ((k, v) <- colors)
+            printf("vertex: %s has color: %s\n", k, v)
 
         infile.close()
     }
@@ -59,9 +87,11 @@ object GraphColoring {
     }
 
     @tailrec
-    private def colorPicker(n: Int, used: Set[Int]): Int = if (!used.contains(n)) n else colorPicker(n + 1, used)
+    private def colorPicker(n: Int, used: Set[Int]): Int =
+        if (!used.contains(n)) n else colorPicker(n + 1, used)
 
-    def applyColors(graph: mutable.Map[Int, List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
+    def applyColors(graph: mutable.Map[Int,
+        List[Int]], vertices: List[Int]): mutable.Map[Int, Int] = {
         val coloredGraph = mutable.Map[Int, Int]()
 
         def getUsedColors(vertex: Int): Set[Int] = {
@@ -78,46 +108,3 @@ object GraphColoring {
     }
 
 }
-
-//def getc(vertex: Int): Int = {
-//    used_colors :+ this.graph()(vertex).filter(e => colored.contains(e)).map(e => colored(e))
-//    (colorPicker(-1, used_colors))
-//}
-//
-//
-//def applyColors(): mutable.Map[Int, Int] = {
-//    val colored = mutable.Map[Int, Int]()
-//    var used_colors = List[Int]()
-//
-//    def getColor(vertex: Int): Int = {
-//        this.graph()(vertex).foreach(e => {
-//            if (colored.contains(e)) {
-//                used_colors = used_colors :+ colored(e)
-//            }
-//        })
-//        (colorPicker(0, used_colors))
-//    }
-//
-//    this.vertices.foreach(vertex => colored.put(vertex, getColor(vertex)))
-//    colored
-//}
-//
-//def applyColorsImper(): mutable.Map[Int, Int] = {
-//    var colored = mutable.Map[Int, Int]()
-//    var used_colors = List[Int]()
-//
-//    for (vertex <- this.vertices) {
-//        var edges = this.graph()(vertex);
-//
-//        for (e <- edges) {
-//            if (colored.contains(e)) {
-//                used_colors = used_colors :+ colored(e)
-//            }
-//        }
-//
-//        var color = (colorPicker(0, used_colors))
-//        colored.put(vertex, color)
-//    }
-//    colored
-//}
-
