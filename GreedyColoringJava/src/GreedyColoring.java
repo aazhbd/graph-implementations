@@ -52,7 +52,6 @@ public class GreedyColoring {
     }
 
     public void printGraph() {
-        System.out.println("--------- Printing the graph ----------------");
         for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
             System.out.println(vertex + " has connection with " + Arrays.toString(edges.toArray()));
@@ -60,7 +59,6 @@ public class GreedyColoring {
     }
 
     public void printColors(HashMap<Integer, Integer> colored) {
-        System.out.println("--------- Printing the colors of the graph ----------------");
         Set<Map.Entry<Integer, Integer>> entries = colored.entrySet();
 
         for (Map.Entry<Integer, Integer> entry : entries) {
@@ -69,7 +67,7 @@ public class GreedyColoring {
     }
 
     public static void main(String[] args) {
-        String input = "E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\completegraph.txt";
+        String input = "/home/abdullah/Documents/GraphInputs/completegraph.txt";
         FileInputStream instr = null;
 
         try {
@@ -81,13 +79,21 @@ public class GreedyColoring {
 
         Scanner in = new Scanner(System.in);
 
-        int[] vs = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-        Integer[] Vs = Arrays.stream(vs).boxed().toArray(Integer[]::new);
+        int[] vs = Arrays.stream(in.nextLine()
+                    .split("\\s+"))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+
+        Integer[] Vs = Arrays.stream(vs)
+                    .boxed().toArray(Integer[]::new);
 
         GreedyColoring graph = new GreedyColoring(Arrays.asList(Vs));
 
         while (in.hasNext()) {
-            int[] eg = Arrays.stream(in.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
+            int[] eg = Arrays.stream(in.nextLine()
+                        .split("\\s+"))
+                        .mapToInt(Integer::parseInt).toArray();
+
             graph.addConnection(eg[0], eg[1]);
         }
 
@@ -95,7 +101,9 @@ public class GreedyColoring {
 
         graph.printColors(graph.applyColors());
 
-        GreedyColoring gc = new GreedyColoring(Arrays.asList(6, 5, 4, 3, 2, 1));
+        GreedyColoring gc = new GreedyColoring(
+                                Arrays.asList(6, 5, 4, 3, 2, 1));
+
         gc.addConnection(1, 2);
         gc.addConnection(1, 3);
         gc.addConnection(2, 4);
