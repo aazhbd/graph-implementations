@@ -1,11 +1,14 @@
 // blank line
 
-/** Implementation of greedy graph coloring in Java
- *
+/**
+ * Implementation of greedy graph coloring in Java
+ * <p>
  * The code produces colored graphs from input adjacency
- * lists from file or manually created objects.
+ * lists from files or manually created objects.
+ *
  * @author Abdullah Al Zakir Hossain, August 2020
  */
+
 import java.util.*;
 import java.io.*;
 
@@ -79,7 +82,7 @@ public class GreedyColoring {
     public static void main(String[] args) {
         /**
          * Test cases from files. The string with file name needs to be
-         * updated for different graph. The file should contain a line
+         * updated for different graphs. The file should contain a line
          * of ordering values and adjacency list of the graph.
          */
         String input = "/home/abdullah/Documents/GraphInputs/completegraph.txt";
@@ -94,30 +97,33 @@ public class GreedyColoring {
 
         Scanner in = new Scanner(System.in);
 
+        /** creating the graph object to color it with first line of input file. */
         int[] vs = Arrays.stream(in.nextLine()
-                    .split("\\s+"))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+                .split("\\s+"))
+                .mapToInt(Integer::parseInt)
+                .toArray();
 
         Integer[] Vs = Arrays.stream(vs)
-                    .boxed().toArray(Integer[]::new);
+                .boxed().toArray(Integer[]::new);
 
         GreedyColoring graph = new GreedyColoring(Arrays.asList(Vs));
 
+        /** Adding the edges to the graph object. */
         while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine()
-                        .split("\\s+"))
-                        .mapToInt(Integer::parseInt).toArray();
+                    .split("\\s+"))
+                    .mapToInt(Integer::parseInt).toArray();
 
             graph.addConnection(eg[0], eg[1]);
         }
 
         graph.printGraph();
 
+        /** Applying the colors to the graph and printing with formatting. */
         graph.printColors(graph.applyColors());
 
         GreedyColoring gc = new GreedyColoring(
-                                Arrays.asList(6, 5, 4, 3, 2, 1));
+                Arrays.asList(6, 5, 4, 3, 2, 1));
 
         gc.addConnection(1, 2);
         gc.addConnection(1, 3);
