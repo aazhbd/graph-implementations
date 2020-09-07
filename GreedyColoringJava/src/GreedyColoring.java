@@ -16,6 +16,10 @@ public class GreedyColoring {
     private HashMap<Integer, List<Integer>> graph;
     private List<Integer> vertices;
 
+    /**
+     * Initializes the graph vertex ordering and empty edges.
+     * @param v vertex ordering.
+     */
     public GreedyColoring(List<Integer> v) {
         this.vertices = v;
         this.graph = new HashMap<Integer, List<Integer>>();
@@ -25,6 +29,11 @@ public class GreedyColoring {
         }
     }
 
+    /**
+     * Adds connection to the graph
+     * @param f vertex number
+     * @param t vertex number
+     */
     public void addConnection(Integer f, Integer t) {
         if (!this.vertices.contains(f) || !this.vertices.contains(t)) return;
 
@@ -37,6 +46,11 @@ public class GreedyColoring {
         this.graph.put(t, tedges);
     }
 
+    /**
+     * Finding the smallest available color.
+     * @param colors
+     * @return
+     */
     public int pickColor(HashSet<Integer> colors) {
         for (int c = 0; ; c++) {
             if (!colors.contains(c)) {
@@ -45,6 +59,10 @@ public class GreedyColoring {
         }
     }
 
+    /**
+     * Applies the colors on vertices
+     * @return the colored graph information.
+     */
     public HashMap<Integer, Integer> applyColors() {
         HashMap<Integer, Integer> colored = new HashMap<Integer, Integer>();
 
@@ -62,6 +80,9 @@ public class GreedyColoring {
         return colored;
     }
 
+    /**
+     *  prints the graph values without coloring information.
+     */
     public void printGraph() {
         for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
@@ -70,6 +91,10 @@ public class GreedyColoring {
         }
     }
 
+    /**
+     * Prints the coloring information of the graph.
+     * @param colored color information of the graph
+     */
     public void printColors(HashMap<Integer, Integer> colored) {
         Set<Map.Entry<Integer, Integer>> entries = colored.entrySet();
 
@@ -108,7 +133,9 @@ public class GreedyColoring {
 
         GreedyColoring graph = new GreedyColoring(Arrays.asList(Vs));
 
-        /** Adding the edges to the graph object. */
+        /**
+         * Adding the edges to the graph object.
+         */
         while (in.hasNext()) {
             int[] eg = Arrays.stream(in.nextLine()
                     .split("\\s+"))
@@ -119,7 +146,9 @@ public class GreedyColoring {
 
         graph.printGraph();
 
-        /** Applying the colors to the graph and printing with formatting. */
+        /**
+         * Applying the colors to the graph and printing with formatting.
+         */
         graph.printColors(graph.applyColors());
 
         GreedyColoring gc = new GreedyColoring(
