@@ -4,8 +4,10 @@
  *
  * The code produces colored graphs from input adjacency
  * lists from file or manually created objects.
+ *
  * @author Abdullah Al Zakir Hossain, August 2020
  */
+
 import scala.collection.mutable
 import scala.annotation.tailrec
 import scala.io.Source
@@ -50,6 +52,7 @@ object GraphColoring {
                 .split("\\s+")
                 .map(_.toInt).toList)
 
+        /** Adding the edges to the graph object. */
         for (c <- lines.tail) {
             val ed = c.toString
                 .split("\\s+")
@@ -57,10 +60,12 @@ object GraphColoring {
             colorGraph.addConnection(ed.head, ed(1))
         }
 
+        /** Applying the colors to the graph. */
         val colors: mutable.Map[Int, Int] = applyColors(
             colorGraph.graph(),
             colorGraph.vertices)
 
+        /** printing the colored graph with formatting. */
         for ((k, v) <- colors)
             printf("vertex: %s has color: %s\n", k, v)
 
