@@ -54,7 +54,8 @@ public class GreedyColoring {
     public void printGraph() {
         for (int vertex : this.vertices) {
             List<Integer> edges = this.graph.get(vertex);
-            System.out.println(vertex + " has connection with " + Arrays.toString(edges.toArray()));
+            System.out.println(vertex + " has connection with "
+                    + Arrays.toString(edges.toArray()));
         }
     }
 
@@ -62,7 +63,8 @@ public class GreedyColoring {
         Set<Map.Entry<Integer, Integer>> entries = colored.entrySet();
 
         for (Map.Entry<Integer, Integer> entry : entries) {
-            System.out.println("vertex: " + entry.getKey() + " has color: " + entry.getValue());
+            System.out.println("vertex: " + entry.getKey()
+                    + " has color: " + entry.getValue());
         }
     }
 
