@@ -5,7 +5,8 @@
  * The code produces colored graphs from input adjacency
  * lists from files or manually created objects.
  *
- * @author Abdullah Al Zakir Hossain, August 2020
+ * @author Abdullah Al Zakir Hossain, aazhbd@conveylive.com
+ * @since August 2020
  */
 
 import scala.collection.mutable
