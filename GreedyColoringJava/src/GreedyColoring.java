@@ -1,3 +1,11 @@
+// blank line
+
+/** Implementation of greedy graph coloring in Java
+ *
+ * The code produces colored graphs from input adjacency
+ * lists from file or manually created objects.
+ * @author Abdullah Al Zakir Hossain, August 2020
+ */
 import java.util.*;
 import java.io.*;
 
@@ -69,6 +77,11 @@ public class GreedyColoring {
     }
 
     public static void main(String[] args) {
+        /**
+         * Test cases from files. The string with file name needs to be
+         * updated for different graph. The file should contain a line
+         * of ordering values and adjacency list of the graph.
+         */
         String input = "/home/abdullah/Documents/GraphInputs/completegraph.txt";
         FileInputStream instr;
 
