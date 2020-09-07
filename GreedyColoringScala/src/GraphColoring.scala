@@ -3,7 +3,7 @@
 /** Implementation of greedy graph coloring in Scala
  *
  * The code produces colored graphs from input adjacency
- * lists from file or manually created objects.
+ * lists from files or manually created objects.
  *
  * @author Abdullah Al Zakir Hossain, August 2020
  */
@@ -38,7 +38,7 @@ object GraphColoring {
         println("\nGraph from file\n")
         /**
          * Test cases from files. The string with file name needs to be
-         * updated for different graph. The file should contain a line
+         * updated for different graphs. The file should contain a line
          * of ordering values and adjacency list of the graph.
          */
         val infile = Source.fromFile("/home/abdullah/Documents/GraphInputs/completegraph.txt")
