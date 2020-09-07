@@ -68,7 +68,7 @@ public class GreedyColoring {
 
     public static void main(String[] args) {
         String input = "/home/abdullah/Documents/GraphInputs/completegraph.txt";
-        FileInputStream instr = null;
+        FileInputStream instr;
 
         try {
             instr = new FileInputStream(input);
