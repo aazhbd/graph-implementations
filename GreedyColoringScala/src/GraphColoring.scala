@@ -1,12 +1,10 @@
 // blank line
 
-/**
- * Implementation of greedy graph coloring in Scala
+/** Implementation of greedy graph coloring in Scala
  *
  * The code produces colored graphs from input adjacency
  * lists from file or manually created objects.
- *
- * Developed by Abdullah Al Zakir Hossain, August 2020
+ * @author Abdullah Al Zakir Hossain, August 2020
  */
 
 import scala.collection.mutable
@@ -44,6 +42,8 @@ object GraphColoring {
          */
         val infile = Source.fromFile("/home/abdullah/Documents/GraphInputs/completegraph.txt")
         val lines = infile.getLines().toList
+
+        /** creating the graph object to color it with first line of input file. */
         val colorGraph = new Graph(
             lines
                 .head
