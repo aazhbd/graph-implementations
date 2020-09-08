@@ -42,7 +42,7 @@ object GraphColoring {
          * updated for different graphs. The file should contain a line
          * of ordering values and adjacency list of the graph.
          */
-        val infile = Source.fromFile("E:\\Documents\\Current\\HS Fulda\\ProgrammingParadigm2020\\Final_Report\\repositories\\graph-implementations\\GraphInputs\\circular1.txt")
+        val infile = Source.fromFile("../GraphInputs/circular1.txt")
         val lines = infile.getLines().toList
 
         /** creating the graph object to color it with first line of input file. */

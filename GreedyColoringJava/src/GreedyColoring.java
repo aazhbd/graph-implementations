@@ -111,7 +111,7 @@ public class GreedyColoring {
          * updated for different graphs. The file should contain a line
          * of ordering values and adjacency list of the graph.
          */
-        String input = "/home/abdullah/Documents/GraphInputs/completegraph.txt";
+        String input = "../GraphInputs/completegraph.txt";
         FileInputStream instr;
 
         try {
